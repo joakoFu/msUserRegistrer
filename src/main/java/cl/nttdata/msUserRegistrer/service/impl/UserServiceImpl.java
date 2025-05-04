@@ -17,7 +17,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse userAdd(UserRequest usuarioRequest) {
         UserEntity userEntity = userMapper.mapToEntity(usuarioRequest);
-        userRepository.save(userEntity);
+        UserEntity result = userRepository.save(userEntity);
+
         return null;
     }
 }

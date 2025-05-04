@@ -1,5 +1,6 @@
 package cl.nttdata.msUserRegistrer.to.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 @Data
@@ -9,9 +10,12 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PhoneRequest {
+    @JsonProperty("numero")
     private String numero;
-    private String codCiudad;
-    private String codPais;
-    private String mail;
 
+    @JsonProperty("codigoCiudad")
+    private String codigoCiudad;
+
+    @JsonProperty("codigoPais")
+    private String codigoPais;
 }
