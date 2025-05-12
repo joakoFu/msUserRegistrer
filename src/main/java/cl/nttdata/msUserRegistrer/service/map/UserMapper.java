@@ -4,16 +4,18 @@ import cl.nttdata.msUserRegistrer.to.entity.PhoneEntity;
 import cl.nttdata.msUserRegistrer.to.entity.UserEntity;
 import cl.nttdata.msUserRegistrer.to.request.PhoneRequest;
 import cl.nttdata.msUserRegistrer.to.request.UserRequest;
+import cl.nttdata.msUserRegistrer.to.response.UserResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 @Component
 public class UserMapper {
     public UserEntity mapToEntity(UserRequest request) {
-        // Mapeo de teléfonos con builder
+
         List<PhoneEntity> telefonos = request.getPhoneRequestList().stream()
                 .map(phoneRequest -> PhoneEntity.builder()
                         .numero(phoneRequest.getNumero())
@@ -22,17 +24,25 @@ public class UserMapper {
                         .build())
                 .collect(Collectors.toList());
 
-        // Crear entidad de usuario con builder
+
         UserEntity user = UserEntity.builder()
                 .nombre(request.getName())
                 .correo(request.getMail())
-                .contraseña(request.getPass())
+                .contrasenna(request.getPass())
                 .telefonos(telefonos)
                 .build();
 
-        // Establecer la relación inversa (usuario en cada teléfono)
+
         telefonos.forEach(tel -> tel.setUsuario(user));
 
         return user;
+    }
+
+    public UserResponse mapToDto(UserEntity userEntity){
+        return UserResponse.builder()
+                .id(String.valueOf(userEntity.getId()))
+                .fechaCreacion(new Date())
+                .fechaUltimoLogin(new Date())
+                .build();
     }
 }

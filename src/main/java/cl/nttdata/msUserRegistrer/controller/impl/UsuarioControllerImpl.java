@@ -9,14 +9,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
+import java.util.HashMap;
+
 @Controller
 @RequiredArgsConstructor
 public class UsuarioControllerImpl implements UsuarioController {
     private final UserServiceImpl userService;
     @Override
     public ResponseEntity<UserResponse> userAdd(UserRequest usuarioRequest) {
-        userService.userAdd(usuarioRequest);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(userService.userAdd(usuarioRequest), HttpStatus.CREATED);
     }
 
 }

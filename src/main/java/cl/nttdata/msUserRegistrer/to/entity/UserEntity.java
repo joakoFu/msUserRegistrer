@@ -5,7 +5,6 @@ import lombok.*;
 
 import java.util.List;
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -19,7 +18,7 @@ public class UserEntity {
 
     private String nombre;
     private String correo;
-    private String contraseña;
+    private String contrasenna;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PhoneEntity> telefonos;

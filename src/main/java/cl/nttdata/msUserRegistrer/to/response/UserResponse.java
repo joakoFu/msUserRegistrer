@@ -5,13 +5,16 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Data
 @Builder
 @Getter
 @Setter
 public class UserResponse {
     String id;
-    String name;
-    String mail;
-    String pass;
+    Date fechaCreacion;
+    Date fechaUltimoLogin;
+
+
 }
